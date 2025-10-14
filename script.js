@@ -1,21 +1,28 @@
-// パスワードは 'yuu0908' を直書きせずにチェックする（簡易保護）
-const CORRECT_PASSWORD = 'yuu0908'; 
+// 🔐 パスワードをハッシュ化した文字列（平文ではない！）
+const HASHED_PASSWORD = "1b3d1f6c3dfae066f82e7a9fd8a9e80b"; // ←後で生成する
 
-let kanjiData = {}; 
-
-// 1. パスワードチェックの関数
-function checkPassword() {
+// 入力をハッシュ化して比較
+async function checkPassword() {
     const input = document.getElementById('passInput').value;
+    const hashedInput = await hashString(input);
     const loginMessage = document.getElementById('login-message');
-    
-    if (input === CORRECT_PASSWORD) {
-        document.getElementById('login-container').style.display = 'none'; 
-        document.getElementById('search-container').style.display = 'block'; 
-        loginMessage.textContent = 'ログイン成功。データを読み込みます。';
-        loadData(); // ログイン成功後にデータを読み込み開始
+
+    if (hashedInput === HASHED_PASSWORD) {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('search-container').style.display = 'block';
+        loadData();
     } else {
         loginMessage.textContent = 'パスワードが違います。';
     }
+}
+
+// SHA-256でハッシュ化
+async function hashString(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 // 2. データの読み込み（非同期処理）
