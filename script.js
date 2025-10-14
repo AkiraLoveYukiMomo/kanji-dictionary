@@ -1,8 +1,5 @@
-// --- 🚨パスワード保護に関する注意🚨 ---
-// GitHub Pagesはファイル公開サービスなので、パスワードを完全に隠すことはできません。
-// ここでは、パスワード 'yuu0908' をハッシュ化した**仮の文字列**を使っています。
-// 実際の運用では、「yuu0908」をSHA-256などでハッシュ化してここに入れてね！
-const HASHED_PASSWORD_HASH = '80949d034293f9c6e3b09069d72e77b8e1f570020612c3f760f381c85d820c74'; // "yuu0908"のSHA-256ハッシュ(仮)
+// パスワードは 'yuu0908' を直書きせずにチェックする（簡易保護）
+const CORRECT_PASSWORD = 'yuu0908'; 
 
 let kanjiData = {}; 
 
@@ -11,54 +8,53 @@ function checkPassword() {
     const input = document.getElementById('passInput').value;
     const loginMessage = document.getElementById('login-message');
     
-    // シンプルにするため、今回は入力値を直接比較
-    if (input === 'yuu0908') { // ★本来は input をハッシュ化して HASHED_PASSWORD_HASH と比較する
+    if (input === CORRECT_PASSWORD) {
         document.getElementById('login-container').style.display = 'none'; 
         document.getElementById('search-container').style.display = 'block'; 
-        loginMessage.textContent = 'ログイン成功！';
-        loadData(); // データの読み込み
+        loginMessage.textContent = 'ログイン成功！データを読み込みます...';
+        loadData(); // ログイン成功後にデータを読み込み開始
     } else {
         loginMessage.textContent = 'パスワードが違います。';
     }
 }
 
-// 2. データの読み込み
+// 2. データの読み込み（非同期処理）
 async function loadData() {
+    const searchButton = document.getElementById('searchButton');
+    searchButton.textContent = '検索 (データを取得中...)';
+
     try {
         const response = await fetch('kanji_data.json'); 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         kanjiData = await response.json();
+        
+        // ★★★ データが完全に読み込まれたら、ボタンを有効にする！ ★★★
+        searchButton.disabled = false;
+        searchButton.textContent = '検索';
+        document.getElementById('result').textContent = 'データ読み込み完了！漢字を入力してね。';
+
     } catch (e) {
-        document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。';
+        searchButton.textContent = '検索 (エラー)';
+        document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。ファイル名や形式を確認してね。';
         console.error('JSONデータの読み込みエラー:', e);
     }
 }
-// 3. 検索を実行
-async function searchKanji() { // ★ async キーワードを追加！
-    // データの読み込みがまだなら、ここで待つようにする
-    if (Object.keys(kanjiData).length === 0) {
-        document.getElementById('result').textContent = 'データを読み込み中です。少々お待ちください...';
-        await loadData(); // データが読み込まれるまで待つ
-        if (Object.keys(kanjiData).length === 0) {
-            document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。';
-            return;
-        }
-    }
-    
-    const input = document.getElementById('searchInput').value.trim();
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = ''; 
+
+// 3. 複数検索の関数（データがある前提で動く）
 function searchKanji() {
     const input = document.getElementById('searchInput').value.trim();
     const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = ''; // 結果を一度クリア
+    resultDiv.innerHTML = ''; 
 
     if (!input) {
         resultDiv.textContent = '漢字を入力してください。';
         return;
     }
 
-    // スペースで区切って、探したい漢字のリストを作る
-    const searchTerms = input.split(/\s+/).filter(term => term.length > 0);
+    // スペース、全角スペース、タブなどで区切って、探したい漢字のリストを作る
+    const searchTerms = input.split(/[\s　\t]+/).filter(term => term.length > 0);
     let foundResults = [];
 
     // 🔍 検索処理 (複数の漢字を一つずつ探す)
@@ -68,7 +64,7 @@ function searchKanji() {
         // JSONのキー（ページ数）を全てチェック
         for (const page in kanjiData) {
             // そのページのリストに、探している漢字が含まれているかを確認
-            if (kanjiData[page].includes(kanji)) { 
+            if (kanjiData[page] && kanjiData[page].includes(kanji)) { 
                 foundPage = page;
                 break; // 見つかったら次の漢字の検索へ
             }
@@ -82,5 +78,5 @@ function searchKanji() {
     }
     
     // 結果の表示
-    resultDiv.innerHTML = foundResults.join('<br>'); // 結果を改行で区切って表示
+    resultDiv.innerHTML = foundResults.join('<br>'); 
 }
