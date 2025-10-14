@@ -1,5 +1,5 @@
 // 🔐 パスワードをハッシュ化した文字列（平文ではない！）
-const HASHED_PASSWORD = "1b3d1f6c3dfae066f82e7a9fd8a9e80b"; // ←後で生成する
+const HASHED_PASSWORD = "eab9862175afae2661a64aa00e2ee73f2f8d00d27f9a5e276c45bb8915cb242e"; // ←後で生成する
 
 // 入力をハッシュ化して比較
 async function checkPassword() {
