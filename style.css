@@ -1,10 +1,10 @@
 /* 基本設定とフォント */
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* モダンで読みやすいフォント */
+    font-family: 'Helvetica Neue', Arial, sans-serif;/* モダンで読みやすいフォント */
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f7f7f7; /* 背景をわずかにグレーに */
+    background-color: #f7f7f7;/* 背景をわずかにグレーに */
     color: #333;
     line-height: 1.6;
 }
@@ -12,8 +12,8 @@ body {
 /* タイトルとヘッダー */
 h1 {
     font-size: 2em;
-    font-weight: 300; /* 細めのフォントでモダンに */
-    color: #2c3e50; /* 落ち着いたダークブルー */
+    font-weight: 300;/* 細めのフォントでモダンに */
+    color: #2c3e50;/* 落ち着いたダークブルー */
     border-bottom: 3px solid #e1e1e1;
     padding-bottom: 15px;
     margin-bottom: 30px;
@@ -27,15 +27,15 @@ h2 {
 #searchInput, #passInput {
     padding: 15px;
     font-size: 1.1em;
-    width: calc(80% - 15px); /* ボタンとのスペースを計算 */
+    width: calc(80% - 15px);/* ボタンとのスペースを計算 */
     margin-right: 15px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 8px; /* 角を丸くする */
-    transition: border-color 0.3s; /* ホバー時のアニメーション */
+    border-radius: 8px;/* 角を丸くする */
+    transition: border-color 0.3s;/* ホバー時のアニメーション */
 }
 #searchInput:focus, #passInput:focus {
-    border-color: #3498db; /* フォーカス時に青い枠線 */
+    border-color: #3498db;/* フォーカス時に青い枠線 */
     outline: none;
 }
 
@@ -43,21 +43,21 @@ h2 {
 button {
     padding: 15px 25px;
     font-size: 1.1em;
-    background-color: #3498db; /* メインカラー（爽やかな青） */
+    background-color: #3498db;/* メインカラー（爽やかな青） */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s; /* アニメーションを追加 */
+    transition: background-color 0.3s, transform 0.1s;/* アニメーションを追加 */
 }
 button:hover {
-    background-color: #2980b9; /* ホバーで少し濃く */
+    background-color: #2980b9;/* ホバーで少し濃く */
 }
 button:active {
-    transform: translateY(1px); /* クリック時に沈む効果 */
+    transform: translateY(1px);/* クリック時に沈む効果 */
 }
 button:disabled {
-    background-color: #bdc3c7; /* 無効なボタンは薄いグレーに */
+    background-color: #bdc3c7;/* 無効なボタンは薄いグレーに */
     cursor: not-allowed;
 }
 
@@ -66,15 +66,15 @@ button:disabled {
     margin-top: 40px;
     padding: 25px;
     border: 1px solid #ddd;
-    background-color: #ffffff; /* 結果エリアの背景を白に */
+    background-color: #ffffff;/* 結果エリアの背景を白に */
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 影をつけて浮かせた印象に */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);/* 影をつけて浮かせた印象に */
     font-size: 1.1em;
 }
 
 /* 検索結果内の強調文字 */
 #result strong {
-    color: #e74c3c; /* ページ数を目立つ赤系に */
+    color: #e74c3c;/* ページ数を目立つ赤系に */
     font-size: 1.2em;
 }
 
