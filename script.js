@@ -53,7 +53,8 @@ function searchKanji() {
         return;
     }
 
-    // スペース、全角スペース、タブなどで区切って、探したい漢字のリストを作る
+    // ★★★ 複数検索の区切り文字を強化！ ★★★
+    // スペース、全角スペース、タブの全てで区切り、空の要素を除去する
     const searchTerms = input.split(/[\s　\t]+/).filter(term => term.length > 0);
     let foundResults = [];
 
@@ -64,7 +65,8 @@ function searchKanji() {
         // JSONのキー（ページ数）を全てチェック
         for (const page in kanjiData) {
             // そのページのリストに、探している漢字が含まれているかを確認
-            if (kanjiData[page] && kanjiData[page].includes(kanji)) { 
+            // kanjiData[page] が存在し、配列であることを確認（安全対策）
+            if (Array.isArray(kanjiData[page]) && kanjiData[page].includes(kanji)) { 
                 foundPage = page;
                 break; // 見つかったら次の漢字の検索へ
             }
