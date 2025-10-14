@@ -11,7 +11,7 @@ function checkPassword() {
     if (input === CORRECT_PASSWORD) {
         document.getElementById('login-container').style.display = 'none'; 
         document.getElementById('search-container').style.display = 'block'; 
-        loginMessage.textContent = 'ログイン成功！データを読み込みます...';
+        loginMessage.textContent = 'ログイン成功。データを読み込みます。';
         loadData(); // ログイン成功後にデータを読み込み開始
     } else {
         loginMessage.textContent = 'パスワードが違います。';
@@ -33,7 +33,7 @@ async function loadData() {
         // ★★★ データが完全に読み込まれたら、ボタンを有効にする！ ★★★
         searchButton.disabled = false;
         searchButton.textContent = '検索';
-        document.getElementById('result').textContent = 'データ読み込み完了！漢字を入力してください。';
+        document.getElementById('result').textContent = 'データ読み込み完了。漢字を入力してください。';
 
     } catch (e) {
         searchButton.textContent = '検索 (エラー)';
