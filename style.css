@@ -97,3 +97,45 @@ button:disabled {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* ===== スマホ対応 (最大幅600pxくらい) ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 15px;
+        font-size: 0.95em;/* 全体の文字を少し小さく */
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    /* 入力欄とボタンを縦並びにする */
+    #searchInput, #passInput {
+        width: 100%;
+        margin: 0 0 10px 0;
+        font-size: 1em;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    #result {
+        font-size: 1.05em;
+        padding: 20px;
+        margin-top: 25px;
+    }
+
+    /* 余白を少しゆったりめに */
+    p {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+}
