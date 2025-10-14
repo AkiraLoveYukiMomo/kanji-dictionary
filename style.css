@@ -1,39 +1,86 @@
+/* 基本設定とフォント */
 body {
-    font-family: sans-serif;
-    max-width: 600px;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* モダンで読みやすいフォント */
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-}
-h1, h2 {
+    background-color: #f7f7f7; /* 背景をわずかにグレーに */
     color: #333;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
+    line-height: 1.6;
 }
+
+/* タイトルとヘッダー */
+h1 {
+    font-size: 2em;
+    font-weight: 300; /* 細めのフォントでモダンに */
+    color: #2c3e50; /* 落ち着いたダークブルー */
+    border-bottom: 3px solid #e1e1e1;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+h2 {
+    font-size: 1.5em;
+    color: #34495e;
+}
+
+/* フォーム部品（検索窓とパスワード入力） */
 #searchInput, #passInput {
-    padding: 12px;
-    font-size: 16px;
-    width: 80%;
-    margin-right: 10px;
+    padding: 15px;
+    font-size: 1.1em;
+    width: calc(80% - 15px); /* ボタンとのスペースを計算 */
+    margin-right: 15px;
     box-sizing: border-box;
     border: 1px solid #ccc;
+    border-radius: 8px; /* 角を丸くする */
+    transition: border-color 0.3s; /* ホバー時のアニメーション */
 }
+#searchInput:focus, #passInput:focus {
+    border-color: #3498db; /* フォーカス時に青い枠線 */
+    outline: none;
+}
+
+/* ボタン */
 button {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #007bff;
+    padding: 15px 25px;
+    font-size: 1.1em;
+    background-color: #3498db; /* メインカラー（爽やかな青） */
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s; /* アニメーションを追加 */
 }
-button:disabled { /* 無効なボタンは灰色にして分かりやすくする */
-    background-color: #aaa;
+button:hover {
+    background-color: #2980b9; /* ホバーで少し濃く */
+}
+button:active {
+    transform: translateY(1px); /* クリック時に沈む効果 */
+}
+button:disabled {
+    background-color: #bdc3c7; /* 無効なボタンは薄いグレーに */
     cursor: not-allowed;
 }
+
+/* 検索結果エリア */
 #result {
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 40px;
+    padding: 25px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    font-size: 18px;
-    line-height: 1.6;
+    background-color: #ffffff; /* 結果エリアの背景を白に */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 影をつけて浮かせた印象に */
+    font-size: 1.1em;
+}
+
+/* 検索結果内の強調文字 */
+#result strong {
+    color: #e74c3c; /* ページ数を目立つ赤系に */
+    font-size: 1.2em;
+}
+
+/* ログインメッセージ */
+#login-message {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
 }
