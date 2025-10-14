@@ -32,8 +32,21 @@ async function loadData() {
         console.error('JSONデータの読み込みエラー:', e);
     }
 }
-
-// 3. 複数検索の関数
+// 3. 検索を実行
+async function searchKanji() { // ★ async キーワードを追加！
+    // データの読み込みがまだなら、ここで待つようにする
+    if (Object.keys(kanjiData).length === 0) {
+        document.getElementById('result').textContent = 'データを読み込み中です。少々お待ちください...';
+        await loadData(); // データが読み込まれるまで待つ
+        if (Object.keys(kanjiData).length === 0) {
+            document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。';
+            return;
+        }
+    }
+    
+    const input = document.getElementById('searchInput').value.trim();
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = ''; 
 function searchKanji() {
     const input = document.getElementById('searchInput').value.trim();
     const resultDiv = document.getElementById('result');
