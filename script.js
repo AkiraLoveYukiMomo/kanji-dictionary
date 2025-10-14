@@ -33,11 +33,11 @@ async function loadData() {
         // ★★★ データが完全に読み込まれたら、ボタンを有効にする！ ★★★
         searchButton.disabled = false;
         searchButton.textContent = '検索';
-        document.getElementById('result').textContent = 'データ読み込み完了！漢字を入力してね。';
+        document.getElementById('result').textContent = 'データ読み込み完了！漢字を入力してください。';
 
     } catch (e) {
         searchButton.textContent = '検索 (エラー)';
-        document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。ファイル名や形式を確認してね。';
+        document.getElementById('result').textContent = 'データファイルの読み込みに失敗しました。ファイル名や形式を確認してください。';
         console.error('JSONデータの読み込みエラー:', e);
     }
 }
@@ -73,7 +73,7 @@ function searchKanji() {
         }
 
         if (foundPage) {
-            foundResults.push(`「${kanji}」は **${foundPage}** ページにあります。`);
+            foundResults.push(`「${kanji}」は 【${foundPage}】 ページにあります。`);
         } else {
             foundResults.push(`「${kanji}」は見つかりませんでした。`);
         }
