@@ -31,7 +31,7 @@ async function loadData() {
     searchButton.textContent = '検索 (データを取得中...)';
 
     try {
-        const response = await fetch('kanji_data.json'); 
+        const response = await fetch('data.json'); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
